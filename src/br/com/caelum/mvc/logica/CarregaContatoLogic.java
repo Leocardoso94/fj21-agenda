@@ -1,5 +1,6 @@
 package br.com.caelum.mvc.logica;
 
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +18,15 @@ public class CarregaContatoLogic implements Logica {
 		String dataNascimento = "";
 		String nome = "";
 		if (req.getParameter("id") != null) {
-			ContatoDao dao = new ContatoDao();
+			Connection connection = (Connection) req.getAttribute("conexao");
+
+			ContatoDao dao = new ContatoDao(connection);
 			Contato contato = dao.pesquisar(Integer.parseInt(req.getParameter("id")));
 			id = contato.getId();
 			email = contato.getEmail();
 			nome = contato.getNome();
 			endereco = contato.getEndereco();
 			dataNascimento = new SimpleDateFormat("dd/MM/yyyy").format(contato.getDataNascimento().getTime());
-			
 		}
 		req.setAttribute("id", id);
 		req.setAttribute("email", email);

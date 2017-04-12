@@ -1,5 +1,6 @@
 package br.com.caelum.mvc.logica;
 
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,10 +30,10 @@ public class AdicionaOuAlteraContatoLogic implements Logica{
 			System.out.println("Erro de conversão da data");			 
 		}
 		contato.setDataNascimento(dataNascimento);
-		
-		ContatoDao contatoDao = new ContatoDao();
-		
-		System.out.println(req.getParameter("id"));
+		Connection connection = (Connection) req
+				.getAttribute("conexao");
+
+		ContatoDao contatoDao = new ContatoDao(connection);
 		
 		if(!req.getParameter("id").equals("0")){
 			contato.setId(Long.parseLong(req.getParameter("id")));

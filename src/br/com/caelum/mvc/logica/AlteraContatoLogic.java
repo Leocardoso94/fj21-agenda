@@ -1,5 +1,6 @@
 package br.com.caelum.mvc.logica;
 
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.caelum.agenda.dao.ContatoDao;
 import br.com.caelum.agenda.modelo.Contato;
 
-public class AlteraContatoLogic implements Logica{
+public class AlteraContatoLogic implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -26,12 +27,13 @@ public class AlteraContatoLogic implements Logica{
 			dataNascimento = Calendar.getInstance();
 			dataNascimento.setTime(date);
 		} catch (ParseException e) {
-			System.out.println("Erro de conversão da data");			 
+			System.out.println("Erro de conversão da data");
 		}
 		contato.setDataNascimento(dataNascimento);
-		
-		ContatoDao contatoDao = new ContatoDao();
-		
+		Connection connection = (Connection) req.getAttribute("conexao");
+
+		ContatoDao contatoDao = new ContatoDao(connection);
+
 		contatoDao.altera(contato);
 		return "mvc?logica=ListaContatosLogic";
 	}
