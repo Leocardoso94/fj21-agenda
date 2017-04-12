@@ -8,7 +8,9 @@
 </head>
 <body>
 	<c:import url="cabecalho.jsp" />
-	<form action="adicionaContato">
+	<h3>Adicionar Contato</h3>
+	<form action="mvc">
+	<input value="AdicionaContatoLogic" name="logica" readonly type="hidden"/>
 		Nome: <input type="text" name="nome" /> <br /> E-mail: <input
 			type="text" name="email" /><br /> Endereço: <input type="text"
 			name="endereco" /><br /> Data Nascimento:

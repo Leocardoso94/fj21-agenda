@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>fj21-agenda</display-name>
 	<welcome-file-list>
-		<welcome-file>bemvindo.jsp</welcome-file>
+		<welcome-file>bem-vindo.jsp</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
